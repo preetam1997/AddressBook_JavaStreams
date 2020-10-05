@@ -25,27 +25,7 @@ public class DriverClass {
 		
 	}
 	
-	public static void MapPerson(Contacts c) {
-		if(c!=null) {
-			if(PersonToCity.containsKey(c.City))
-				PersonToCity.get(c.City).add(c);
-			else {
-				LinkedList<Contacts>  ContactByCity = new LinkedList<Contacts>();
-				ContactByCity.add(c);
-				PersonToCity.put(c.City,ContactByCity);
-			}
-			if(PersonToState.containsKey(c.City))
-				PersonToState.get(c.City).add(c);
-			else {
-				LinkedList<Contacts>  ContactByState = new LinkedList<Contacts>();
-				ContactByState.add(c);
-				PersonToState.put(c.City,ContactByState);
-			}	
-		}
-		
-		
-		
-	}
+	
 	public static void main(String[] args) {
 		
 		System.out.println("Welcome to AddressBook Assignment");
@@ -86,7 +66,7 @@ public class DriverClass {
 					
 					}
 					Contacts c= e.addAdress();
-					MapPerson(c);
+					//MapPerson(c);
 					
 					break;
 			
@@ -134,13 +114,29 @@ public class DriverClass {
 					addressList.stream().forEach(i->AddressBookMap.get(i).SearchNameByCity(city));
 					break;
 					
-			case 7:System.out.println("Enter State name");
+			case 7: System.out.println("Enter State name");
 					Scanner myObj7 = new Scanner(System.in);
 					String State = myObj7.nextLine();
 					addressList.stream().forEach(i->AddressBookMap.get(i).SearchNameByState(State));
 					break;
 					
-			
+			case 8:	System.out.println("Enter City Name (Person Mapping)");
+					Scanner myObj8 = new Scanner(System.in);
+					String City = myObj8.nextLine();
+					addressList.stream().
+					forEach(i->AddressBookMap.get(i).
+							getMappingByCity(City).stream().
+							forEach(p -> System.out.println(p.firstName+" "+p.lastName)));
+					break;
+					
+			case 9:	System.out.println("Enter City Name (Person Mapping)");
+					Scanner myObj9 = new Scanner(System.in);
+					String state = myObj9.nextLine();
+					addressList.stream().
+					forEach(i->AddressBookMap.get(i).
+							getMappingByState(state).stream().
+							forEach(p -> System.out.println(p.firstName+" "+p.lastName)));
+			break;
 			case 12: return;
 			}
 		

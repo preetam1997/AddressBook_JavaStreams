@@ -1,9 +1,11 @@
 package addressbook;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -14,7 +16,7 @@ import java.util.stream.Collectors;
 public class AddressBook {
 	private LinkedList<Contacts>  contactList;
 	private LinkedList<String>  fNamelName;
-	
+	private static Map<String, List<Contacts>> PersonToCity = new HashMap<String,List<Contacts>>();
 	Scanner myObj = new Scanner(System.in);
 	
 	public AddressBook() {
@@ -173,6 +175,18 @@ public class AddressBook {
 			
 		
 		
+	}
+	
+	public List<Contacts> getMappingByCity(String City) {
+		PersonToCity = contactList.stream()
+				.collect(Collectors.groupingBy(i->i.City));
+		return PersonToCity.get(City);
+	}
+	
+	public List<Contacts> getMappingByState(String State) {
+		PersonToCity = contactList.stream()
+				.collect(Collectors.groupingBy(i->i.State));
+		return PersonToCity.get(State);
 	}
 	
 	
