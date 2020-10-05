@@ -1,11 +1,14 @@
 package addressbook;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+
 
 
 public class AddressBook {
@@ -152,11 +155,32 @@ public class AddressBook {
                 .collect(Collectors.toSet()).size())>=1;
 	}
 	
+	public void SearchNameByCity(String city) {
+		
+		contactList.stream().
+				filter(i->i.City.matches(city)).
+				collect(Collectors.toList()).
+				forEach(p->System.out.println(p.firstName+" "+p.lastName));
+		
+	}
+	
+	public void SearchNameByState(String State) {
+		
+		contactList.stream().
+			filter(i->i.State.matches(State)).
+			collect(Collectors.toList()).
+			forEach(p->System.out.println(p.firstName+" "+p.lastName));
+			
+		
+		
+	}
+	
+	
 	
 
 		
 		
-	}
+}
 	
 	
 	
