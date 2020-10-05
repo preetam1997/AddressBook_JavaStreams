@@ -136,7 +136,20 @@ public class DriverClass {
 					forEach(i->AddressBookMap.get(i).
 							getMappingByState(state).stream().
 							forEach(p -> System.out.println(p.firstName+" "+p.lastName)));
-			break;
+					break;
+			
+			case 10:System.out.println("Enter City Name (Person Mapping)");
+				   	Scanner myObj10 = new Scanner(System.in);
+				   	String City1 = myObj10.nextLine();
+				   	System.out.println(PersonToCity.get(City1).size());
+				   	break;
+	
+			case 11:System.out.println("Enter State Name (Person Mapping)");
+					Scanner myObj11 = new Scanner(System.in);
+					String State1 = myObj11.nextLine();
+					System.out.println(PersonToCity.get(State1).size());
+					break;
+	
 			case 12: return;
 			}
 		

@@ -43,11 +43,5 @@ public class Contacts {
 	      return firstName.equals(c.firstName)&& lastName.equals(c.lastName);
 	   }
 	
-	public String get_city() {
-		return City;
-	}
 	
-	public String get_state() {
-		return State;
-	}
 }
