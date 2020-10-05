@@ -1,12 +1,18 @@
 package addressbook;
 
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
+interface Command 
+{
+    void invoke();
+}
 public class DriverClass {
 	
 	private static Map<String, AddressBook> AddressBookMap = new HashMap<String, AddressBook>();
@@ -14,8 +20,38 @@ public class DriverClass {
 	private static LinkedList<String>  addressList = new LinkedList<String>();
 	private static Map<String,LinkedList> PersonToCity = new HashMap<String,LinkedList>();
 	private static Map<String,LinkedList> PersonToState = new HashMap<String,LinkedList>();
+	private static Map<String, Command> commands = new HashMap<String, Command>();
 	
 	
+	public static void CommandMapping(List<Contacts> list) {
+		
+		commands.put("City", new Command() 
+		{
+		    public void invoke() { 
+		    	list.stream().
+		    	sorted(Comparator.comparing(Contacts::get_City)).
+		    			collect(Collectors.toList()).stream().
+		    			forEach(i->i.toString()); }
+		});
+		
+		commands.put("State", new Command() 
+		{
+		    public void invoke() { 
+		    	list.stream().
+		    	sorted(Comparator.comparing(Contacts::get_State)).
+		    			collect(Collectors.toList()).stream().
+		    			forEach(i->i.toString()); }
+		});
+		
+		commands.put("Zip", new Command() 
+		{
+		    public void invoke() { 
+		    	list.stream().
+		    	sorted(Comparator.comparing(Contacts::get_Zip)).
+		    			collect(Collectors.toList()).stream().
+		    			forEach(i->i.toString()); }
+		});
+	}
 	public static void MapAddress(AddressBook e) {
 		
 		System.out.println("Enter Address Book Name");
@@ -44,7 +80,9 @@ public class DriverClass {
 			System.out.println("9.UC9 Search by State Name (Person Mapping)");
 			System.out.println("10.UC10 Count Persons in a City");
 			System.out.println("11.UC10 Count Persons in a State");
-			System.out.println("12.Exit");
+			System.out.println("12.UC11 Sort based on name");
+			System.out.println("13.UC12 Sort based on State, City or Zip");
+			System.out.println("14.Exit");
 			System.out.println("Enter your choice:");
 			int choice = myObj.nextInt();
 			switch(choice) {
@@ -151,7 +189,7 @@ public class DriverClass {
 					System.out.println(PersonToCity.get(State1).size());
 					break;
 	
-			case 12: System.out.println("Enter Address Book name");
+			case 12:System.out.println("Enter Address Book name");
 					Scanner myObj12 = new Scanner(System.in);
 					String addressBookName5 = myObj12.nextLine();
 					AddressBook e7 = AddressBookMap.get(addressBookName5);
@@ -164,7 +202,21 @@ public class DriverClass {
 					l.stream().forEach(i->i.toString());
 					break;
 			
-			
+			case 13:System.out.println("Enter Address Book name");
+					Scanner myObj13 = new Scanner(System.in);
+					String addressBookName6 = myObj13.nextLine();
+					AddressBook e8 = AddressBookMap.get(addressBookName6);
+					if(e8==null) {
+						System.out.println("AddressBook Not Found");
+						continue;
+	
+					}
+					System.out.println("Enter Choice");
+					CommandMapping(e8.contactList);
+					String Choice = myObj13.nextLine();
+					commands.get(Choice).invoke();
+					break;
+					
 			case 14: return;
 			}
 		

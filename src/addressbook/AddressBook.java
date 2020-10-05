@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 
 public class AddressBook {
-	private LinkedList<Contacts>  contactList;
+	public LinkedList<Contacts>  contactList;
 	private LinkedList<String>  fNamelName;
 	private static Map<String, List<Contacts>> PersonToCity = new HashMap<String,List<Contacts>>();
 	Scanner myObj = new Scanner(System.in);

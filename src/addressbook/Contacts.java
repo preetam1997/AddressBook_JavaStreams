@@ -52,4 +52,18 @@ public class Contacts {
 		return firstName;
 	}
 	
+	public String get_City() {
+		
+		return City;
+	}
+	
+	public String get_State() {
+		
+		return State;
+	}
+	
+	public String get_Zip() {
+		
+		return zip;
+	}
 }
