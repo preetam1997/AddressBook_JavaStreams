@@ -30,7 +30,12 @@ public class Contacts {
 		return Objects.hash(firstName, lastName, Address, City, State, zip, phoneNumber, email);
 		
 	}
-	
+	@Override
+	public String toString() {
+		
+		System.out.println(firstName+" "+lastName+" "+Address+" "+City+" "+State+" "+zip+" "+phoneNumber+" "+email); 
+		return null;
+	}
 	@Override
 	public boolean equals(Object obj) {
 	      if (obj == this) {
@@ -42,6 +47,9 @@ public class Contacts {
 	      Contacts c = (Contacts) obj;
 	      return firstName.equals(c.firstName)&& lastName.equals(c.lastName);
 	   }
-	
+	public String get_firstName() {
+		
+		return firstName;
+	}
 	
 }

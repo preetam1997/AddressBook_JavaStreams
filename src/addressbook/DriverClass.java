@@ -3,6 +3,7 @@ package addressbook;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -150,7 +151,21 @@ public class DriverClass {
 					System.out.println(PersonToCity.get(State1).size());
 					break;
 	
-			case 12: return;
+			case 12: System.out.println("Enter Address Book name");
+					Scanner myObj12 = new Scanner(System.in);
+					String addressBookName5 = myObj12.nextLine();
+					AddressBook e7 = AddressBookMap.get(addressBookName5);
+					if(e7==null) {
+						System.out.println("AddressBook Not Found");
+						continue;
+			
+					}
+					List<Contacts> l = e7.SortbyFirstName();
+					l.stream().forEach(i->i.toString());
+					break;
+			
+			
+			case 14: return;
 			}
 		
 	}

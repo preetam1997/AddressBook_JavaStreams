@@ -1,5 +1,6 @@
 package addressbook;
 
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -189,7 +190,10 @@ public class AddressBook {
 		return PersonToCity.get(State);
 	}
 	
+	public List<Contacts> SortbyFirstName(){
 	
+		return contactList.stream().sorted(Comparator.comparing(Contacts::get_firstName)).collect(Collectors.toList());
+	} 
 	
 
 		
