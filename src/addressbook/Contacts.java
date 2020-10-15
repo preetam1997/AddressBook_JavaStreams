@@ -30,12 +30,7 @@ public class Contacts {
 		return Objects.hash(firstName, lastName, Address, City, State, zip, phoneNumber, email);
 		
 	}
-	@Override
-	public String toString() {
-		
-		System.out.println(firstName+" "+lastName+" "+Address+" "+City+" "+State+" "+zip+" "+phoneNumber+" "+email); 
-		return null;
-	}
+	
 	@Override
 	public boolean equals(Object obj) {
 	      if (obj == this) {
@@ -66,4 +61,6 @@ public class Contacts {
 		
 		return zip;
 	}
+	
+	public String toString(){return firstName+" "+ lastName+" "+Address+" "+City+" "+State+" "+zip+" "+phoneNumber+" "+email;}
 }

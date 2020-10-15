@@ -18,8 +18,6 @@ public class DriverClass {
 	private static Map<String, AddressBook> AddressBookMap = new HashMap<String, AddressBook>();
 	public static Scanner myObj = new Scanner(System.in);
 	private static LinkedList<String>  addressList = new LinkedList<String>();
-	private static Map<String,LinkedList> PersonToCity = new HashMap<String,LinkedList>();
-	private static Map<String,LinkedList> PersonToState = new HashMap<String,LinkedList>();
 	private static Map<String, Command> commands = new HashMap<String, Command>();
 	
 	
@@ -82,7 +80,9 @@ public class DriverClass {
 			System.out.println("11.UC10 Count Persons in a State");
 			System.out.println("12.UC11 Sort based on name");
 			System.out.println("13.UC12 Sort based on State, City or Zip");
-			System.out.println("14.Exit");
+			System.out.println("14.UC13 Write contacts to file");
+			System.out.println("15.UC13 Read contacts from file");
+			System.out.println("16.Exit");
 			System.out.println("Enter your choice:");
 			int choice = myObj.nextInt();
 			switch(choice) {
@@ -168,7 +168,7 @@ public class DriverClass {
 							forEach(p -> System.out.println(p.firstName+" "+p.lastName)));
 					break;
 					
-			case 9:	System.out.println("Enter City Name (Person Mapping)");
+			case 9:	System.out.println("Enter State Name (Person Mapping)");
 					Scanner myObj9 = new Scanner(System.in);
 					String state = myObj9.nextLine();
 					addressList.stream().
@@ -177,16 +177,18 @@ public class DriverClass {
 							forEach(p -> System.out.println(p.firstName+" "+p.lastName)));
 					break;
 			
-			case 10:System.out.println("Enter City Name (Person Mapping)");
+			case 10:System.out.println("Enter State Name (Person Mapping) for Number of Persons in it");
 				   	Scanner myObj10 = new Scanner(System.in);
 				   	String City1 = myObj10.nextLine();
-				   	System.out.println(PersonToCity.get(City1).size());
+				   	
+				   	System.out.println(AddressBook.PersonToCity.get(City1).size());
 				   	break;
 	
-			case 11:System.out.println("Enter State Name (Person Mapping)");
+			case 11:System.out.println("Enter State Name (Person Mapping) for Number of Persons in it");
 					Scanner myObj11 = new Scanner(System.in);
 					String State1 = myObj11.nextLine();
-					System.out.println(PersonToCity.get(State1).size());
+					
+					System.out.println(AddressBook.PersonToState.get(State1).size());
 					break;
 	
 			case 12:System.out.println("Enter Address Book name");
@@ -217,7 +219,14 @@ public class DriverClass {
 					commands.get(Choice).invoke();
 					break;
 					
-			case 14: return;
+			case 14:AddressBookFileIOService abfis = new AddressBookFileIOService();
+					abfis.writeData(AddressBookMap);
+					break;
+					
+			case 15:new AddressBookFileIOService().readData(AddressBookMap);
+					break;
+					
+			case 16: return;
 			}
 		
 	}

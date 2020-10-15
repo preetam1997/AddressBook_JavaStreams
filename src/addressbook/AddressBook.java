@@ -17,7 +17,8 @@ import java.util.stream.Collectors;
 public class AddressBook {
 	public LinkedList<Contacts>  contactList;
 	private LinkedList<String>  fNamelName;
-	private static Map<String, List<Contacts>> PersonToCity = new HashMap<String,List<Contacts>>();
+	public static Map<String, List<Contacts>> PersonToCity = new HashMap<String,List<Contacts>>();
+	public static Map<String, List<Contacts>> PersonToState = new HashMap<String,List<Contacts>>();
 	Scanner myObj = new Scanner(System.in);
 	
 	public AddressBook() {
@@ -154,7 +155,7 @@ public class AddressBook {
 
         Set<Contacts> items = new HashSet<>();
         return (list.stream()
-                .filter(n -> !items.add(n)) // Set.add() returns false if the element was already in the set.
+                .filter(n -> !items.add(n)) 
                 .collect(Collectors.toSet()).size())>=1;
 	}
 	
@@ -185,9 +186,9 @@ public class AddressBook {
 	}
 	
 	public List<Contacts> getMappingByState(String State) {
-		PersonToCity = contactList.stream()
+		PersonToState = contactList.stream()
 				.collect(Collectors.groupingBy(i->i.State));
-		return PersonToCity.get(State);
+		return PersonToState.get(State);
 	}
 	
 	public List<Contacts> SortbyFirstName(){
